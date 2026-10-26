@@ -30,6 +30,7 @@ export default function App() {
         'gw-stripe',
         'gw-razorpay',
         'gw-paypal',
+        'gw-square',
         'gw-shopify',
         'gw-woocommerce',
         'gw-zenoti',

@@ -103,18 +103,20 @@ export default defineNuxtPlugin(() => {
       />
 
       {/* Security Best Practices Callout - Minimalist Solid Amber */}
-      <div id="security" className="mt-8 rounded-xl border border-amber-300 bg-amber-50/70 p-5 shadow-sm">
-        <div className="flex items-start gap-3">
-          <ShieldAlert className="h-5 w-5 text-amber-700 shrink-0 mt-0.5" />
-          <div className="space-y-1.5 text-xs text-amber-900 leading-relaxed">
-            <h4 className="font-heading text-sm font-bold text-amber-950">
+      <div id="security" className="mt-10 rounded-2xl border border-amber-300 bg-amber-50/70 p-6 sm:p-7 shadow-sm">
+        <div className="flex items-start gap-4">
+          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-amber-100 text-amber-800 shrink-0 mt-0.5">
+            <ShieldAlert className="h-5 w-5" />
+          </div>
+          <div className="space-y-2 text-[13px] text-amber-950 leading-relaxed">
+            <h4 className="font-heading text-base font-bold text-amber-950">
               Crucial Security Rule: Publishable vs Secret Keys
             </h4>
             <p>
-              Only use a <strong className="text-stone-950">Publishable Key</strong> (prefix: <code className="font-mono bg-amber-200/70 border border-amber-300 text-amber-950 px-1 py-0.5 rounded">pk_live_...</code> or <code className="font-mono bg-amber-200/70 border border-amber-300 text-amber-950 px-1 py-0.5 rounded">pk_test_...</code>) on the client side.
+              Only use a <strong className="text-stone-950">Publishable Key</strong> (prefix: <code className="font-mono bg-amber-200/80 border border-amber-300 text-amber-950 px-1.5 py-0.5 rounded">pk_live_...</code> or <code className="font-mono bg-amber-200/80 border border-amber-300 text-amber-950 px-1.5 py-0.5 rounded">pk_test_...</code>) on the client side.
             </p>
             <p>
-              <strong className="text-stone-950">Secret keys</strong> (<code className="font-mono bg-amber-200/70 border border-amber-300 text-amber-950 px-1 py-0.5 rounded">sk_live_...</code>) are strictly for server-to-server calls (refunds, order updates, and report reads). The Elysium SDK automatically audits runtime config and strips secret keys to protect your account.
+              <strong className="text-stone-950">Secret keys</strong> (<code className="font-mono bg-amber-200/80 border border-amber-300 text-amber-950 px-1.5 py-0.5 rounded">sk_live_...</code>) are strictly for server-to-server calls (refunds, order updates, and report reads). The Elysium SDK automatically audits runtime config and strips secret keys to protect your account.
             </p>
           </div>
         </div>

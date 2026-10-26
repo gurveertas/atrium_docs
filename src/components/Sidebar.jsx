@@ -36,6 +36,7 @@ export default function Sidebar({ activeSection, onSelectSection }) {
         { id: 'gw-stripe', title: 'Stripe Adapter' },
         { id: 'gw-razorpay', title: 'Razorpay Adapter' },
         { id: 'gw-paypal', title: 'PayPal Adapter' },
+        { id: 'gw-square', title: 'Square Adapter' },
         { id: 'gw-shopify', title: 'Shopify Adapter' },
         { id: 'gw-woocommerce', title: 'WooCommerce Adapter' },
         { id: 'gw-zenoti', title: 'Zenoti Adapter' },
@@ -105,7 +106,7 @@ export default function Sidebar({ activeSection, onSelectSection }) {
                         }`}
                       >
                         <span className="truncate">{item.title}</span>
-                        <ChevronRight className={`h-3 w-3 transition-transform ${isActive ? 'text-stone-900 translate-x-0.5' : 'text-stone-400 group-hover:text-stone-600'}`} />
+                        <ChevronRight className={`h-3 w-3 transition-transform duration-200 ${isActive ? 'text-stone-900 translate-x-1' : 'text-stone-400 group-hover:text-stone-700 group-hover:translate-x-1'}`} />
                       </a>
                     </li>
                   );

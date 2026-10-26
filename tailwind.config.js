@@ -9,6 +9,7 @@ export default {
       fontFamily: {
         sans: ['Plus Jakarta Sans', 'Inter', 'system-ui', 'sans-serif'],
         heading: ['Outfit', 'Plus Jakarta Sans', 'sans-serif'],
+        display: ['Instrument Serif', 'Newsreader', 'Georgia', 'serif'],
         mono: ['JetBrains Mono', 'Fira Code', 'monospace'],
       },
       colors: {

@@ -11,6 +11,7 @@ export default function MacPanel({
   showLineNumbers = true 
 }) {
   const [copied, setCopied] = useState(false);
+  const [isHoveredDots, setIsHoveredDots] = useState(false);
 
   const handleCopy = () => {
     navigator.clipboard.writeText(code);
@@ -21,16 +22,26 @@ export default function MacPanel({
   const lines = code.trim().split('\n');
 
   return (
-    <div className="my-5 overflow-hidden rounded-xl border border-stone-800 bg-[#0D1117] shadow-mac-panel transition-all duration-200">
+    <div className="my-6 overflow-hidden rounded-xl border border-stone-800 bg-[#0D1117] shadow-mac-panel transition-all duration-300 hover:border-stone-700">
       {/* macOS Topbar */}
       <div className="flex items-center justify-between border-b border-[#21262D] bg-[#161B22] px-4 py-3 select-none">
         {/* Left: macOS Traffic Lights & Tabs/Title */}
         <div className="flex items-center gap-4">
-          {/* Traffic lights */}
-          <div className="flex items-center gap-2">
-            <span className="h-3 w-3 rounded-full bg-[#FF5F56] border border-[#E0443E]/60 inline-block"></span>
-            <span className="h-3 w-3 rounded-full bg-[#FFBD2E] border border-[#DEA123]/60 inline-block"></span>
-            <span className="h-3 w-3 rounded-full bg-[#27C93F] border border-[#1AAB29]/60 inline-block"></span>
+          {/* Traffic lights with authentic macOS micro-interaction on hover */}
+          <div 
+            className="flex items-center gap-2 cursor-pointer py-1"
+            onMouseEnter={() => setIsHoveredDots(true)}
+            onMouseLeave={() => setIsHoveredDots(false)}
+          >
+            <span className="relative flex h-3 w-3 items-center justify-center rounded-full bg-[#FF5F56] border border-[#E0443E]/60 transition-transform duration-150 hover:scale-110 active:scale-95">
+              {isHoveredDots && <span className="text-[8px] font-bold text-red-950 leading-none select-none">×</span>}
+            </span>
+            <span className="relative flex h-3 w-3 items-center justify-center rounded-full bg-[#FFBD2E] border border-[#DEA123]/60 transition-transform duration-150 hover:scale-110 active:scale-95">
+              {isHoveredDots && <span className="text-[8px] font-bold text-amber-950 leading-none select-none">−</span>}
+            </span>
+            <span className="relative flex h-3 w-3 items-center justify-center rounded-full bg-[#27C93F] border border-[#1AAB29]/60 transition-transform duration-150 hover:scale-110 active:scale-95">
+              {isHoveredDots && <span className="text-[7px] font-bold text-green-950 leading-none select-none">+</span>}
+            </span>
           </div>
 
           {/* Optional Tabs or Title */}
@@ -40,10 +51,10 @@ export default function MacPanel({
                 <button
                   key={tab.id}
                   onClick={() => onTabChange && onTabChange(tab.id)}
-                  className={`px-3 py-1 text-xs font-medium rounded-md transition-all ${
+                  className={`px-3 py-1 text-xs font-medium rounded-md transition-all duration-200 active:scale-95 ${
                     activeTab === tab.id
-                      ? 'bg-stone-800 text-white font-semibold'
-                      : 'text-stone-400 hover:text-stone-200 hover:bg-stone-800/50'
+                      ? 'bg-stone-800 text-white font-semibold shadow-xs'
+                      : 'text-stone-400 hover:text-stone-200 hover:bg-stone-800/60'
                   }`}
                 >
                   {tab.label}
@@ -53,32 +64,32 @@ export default function MacPanel({
           ) : (
             <div className="text-xs font-mono text-stone-400 flex items-center gap-2">
               <span className="text-stone-600">/</span>
-              <span>{title}</span>
+              <span className="hover:text-stone-300 transition-colors">{title}</span>
             </div>
           )}
         </div>
 
-        {/* Right: Language badge & Copy button */}
+        {/* Right: Language badge & Copy button with micro-bounce */}
         <div className="flex items-center gap-3">
           <span className="text-[11px] font-mono font-semibold uppercase tracking-wider text-stone-500">
             {language}
           </span>
           <button
             onClick={handleCopy}
-            className={`flex items-center gap-1.5 rounded-lg border px-2.5 py-1 text-xs font-medium transition-all ${
+            className={`flex items-center gap-1.5 rounded-lg border px-2.5 py-1 text-xs font-medium transition-all duration-200 active:scale-90 ${
               copied
-                ? 'border-emerald-600 bg-emerald-950/80 text-emerald-400'
+                ? 'border-emerald-600 bg-emerald-950/80 text-emerald-400 shadow-sm'
                 : 'border-stone-700 bg-stone-800 text-stone-300 hover:border-stone-600 hover:bg-stone-700 hover:text-white'
             }`}
           >
             {copied ? (
               <>
-                <Check className="h-3.5 w-3.5" />
-                <span>Copied!</span>
+                <Check className="h-3.5 w-3.5 animate-bounce-subtle" />
+                <span className="font-semibold">Copied!</span>
               </>
             ) : (
               <>
-                <Copy className="h-3.5 w-3.5" />
+                <Copy className="h-3.5 w-3.5 transition-transform duration-200 group-hover:scale-110" />
                 <span>Copy</span>
               </>
             )}
@@ -86,13 +97,13 @@ export default function MacPanel({
         </div>
       </div>
 
-      {/* Code Area: Pitch Black with Crisp Syntax Text */}
+      {/* Code Area: Pitch Black with line hover micro-interaction */}
       <div className="relative overflow-x-auto p-4 font-mono text-[13px] leading-relaxed text-stone-200 bg-[#0D1117]">
         <pre className="flex">
           {showLineNumbers && (
             <div className="mr-4 flex flex-col text-right select-none text-stone-600">
               {lines.map((_, i) => (
-                <span key={i} className="text-xs leading-[1.65]">
+                <span key={i} className="text-xs leading-[1.65] hover:text-stone-400 transition-colors">
                   {i + 1}
                 </span>
               ))}

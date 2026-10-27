@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import MacPanel from './MacPanel';
+import React, { useState, useMemo } from 'react';
+import MacPanel, { highlightCode } from './MacPanel';
 import { CreditCard, CheckCircle2, Webhook, Code2, Play, RefreshCw, Zap, ShieldCheck } from 'lucide-react';
 
 export default function Gateways() {
@@ -571,6 +571,7 @@ await Elysium.createBooking({
 
   const currentGw = gateways.find((g) => g.id === activeGateway) || gateways[0];
   const simulatedOutput = JSON.stringify(generateSimulatedPayload(), null, 2);
+  const highlightedSimOutput = useMemo(() => highlightCode(simulatedOutput, 'json'), [simulatedOutput]);
 
   return (
     <section id="gateways" className="pt-10 pb-8 border-b border-stone-200 scroll-mt-20">
@@ -813,10 +814,11 @@ await Elysium.createBooking({
               <span className="text-[11px] text-stone-500">JSON Output</span>
             </div>
 
-            <div className="p-5 flex-1 overflow-x-auto font-mono text-xs text-stone-200">
-              <pre className="text-cyan-200/90 leading-relaxed whitespace-pre">
-                {simulatedOutput}
-              </pre>
+            <div className="p-5 flex-1 overflow-x-auto font-mono text-xs bg-[#0D1117] code-highlight">
+              <pre 
+                className="leading-relaxed whitespace-pre font-mono text-xs text-[#E6EDF3]"
+                dangerouslySetInnerHTML={{ __html: highlightedSimOutput }}
+              />
             </div>
           </div>
         </div>

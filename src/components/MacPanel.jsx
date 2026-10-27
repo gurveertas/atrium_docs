@@ -1,5 +1,36 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { Check, Copy } from 'lucide-react';
+import Prism from 'prismjs';
+import 'prismjs/components/prism-bash';
+import 'prismjs/components/prism-json';
+import 'prismjs/components/prism-markup';
+
+// Helper to resolve Prism grammar and language ID safely
+export function getGrammarAndLang(lang) {
+  if (!lang) return { grammar: Prism.languages.javascript, langKey: 'javascript' };
+  const l = lang.toLowerCase();
+  if (l === 'bash' || l === 'sh' || l === 'shell' || l === 'terminal') {
+    return { grammar: Prism.languages.bash || Prism.languages.plain, langKey: 'bash' };
+  }
+  if (l === 'html' || l === 'xml' || l === 'markup') {
+    return { grammar: Prism.languages.markup || Prism.languages.plain, langKey: 'markup' };
+  }
+  if (l === 'json') {
+    return { grammar: Prism.languages.json || Prism.languages.plain, langKey: 'json' };
+  }
+  return { grammar: Prism.languages.javascript || Prism.languages.plain, langKey: 'javascript' };
+}
+
+// Highlight any arbitrary code string with Prism
+export function highlightCode(codeStr, lang = 'javascript') {
+  if (!codeStr) return '';
+  const { grammar, langKey } = getGrammarAndLang(lang);
+  try {
+    return Prism.highlight(codeStr.trim(), grammar, langKey);
+  } catch {
+    return codeStr.trim();
+  }
+}
 
 export default function MacPanel({ 
   title = "example.js", 
@@ -20,6 +51,7 @@ export default function MacPanel({
   };
 
   const lines = code.trim().split('\n');
+  const highlightedHtml = useMemo(() => highlightCode(code, language), [code, language]);
 
   return (
     <div className="my-6 overflow-hidden rounded-xl border border-stone-800 bg-[#0D1117] shadow-mac-panel transition-all duration-300 hover:border-stone-700">
@@ -97,19 +129,22 @@ export default function MacPanel({
         </div>
       </div>
 
-      {/* Code Area: Pitch Black with line hover micro-interaction */}
-      <div className="relative overflow-x-auto p-4 font-mono text-[13px] leading-relaxed text-stone-200 bg-[#0D1117]">
-        <pre className="flex">
+      {/* Code Area: Pitch Black with syntax highlighting & line numbers */}
+      <div className="relative overflow-x-auto p-4 font-mono text-[13px] leading-relaxed bg-[#0D1117] code-highlight">
+        <pre className="flex font-mono text-[13px] leading-relaxed">
           {showLineNumbers && (
-            <div className="mr-4 flex flex-col text-right select-none text-stone-600">
+            <div className="mr-4 flex flex-col text-right select-none text-stone-600 shrink-0 font-mono text-[13px] leading-relaxed">
               {lines.map((_, i) => (
-                <span key={i} className="text-xs leading-[1.65] hover:text-stone-400 transition-colors">
+                <span key={i} className="hover:text-stone-400 transition-colors">
                   {i + 1}
                 </span>
               ))}
             </div>
           )}
-          <code className="flex-1 whitespace-pre">{code.trim()}</code>
+          <code 
+            className="flex-1 whitespace-pre font-mono text-[13px] leading-relaxed text-[#E6EDF3]"
+            dangerouslySetInnerHTML={{ __html: highlightedHtml }}
+          />
         </pre>
       </div>
     </div>

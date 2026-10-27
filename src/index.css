@@ -86,3 +86,107 @@ button:focus-visible, input:focus-visible, select:focus-visible {
     scroll-behavior: auto !important;
   }
 }
+
+/* ==========================================================================
+   Vibrant Developer Syntax Theme (Pitch Black #0D1117 Code Panels)
+   ========================================================================== */
+
+.code-highlight {
+  color: #E6EDF3;
+}
+
+/* Comments */
+.code-highlight .token.comment,
+.code-highlight .token.prolog,
+.code-highlight .token.doctype,
+.code-highlight .token.cdata {
+  color: #64748B;
+  font-style: italic;
+}
+
+/* Punctuation & Delimiters */
+.code-highlight .token.punctuation {
+  color: #94A3B8;
+}
+
+/* Keywords & Control flow (import, export, from, const, return, await, async, if) */
+.code-highlight .token.keyword,
+.code-highlight .token.atrule {
+  color: #C084FC;
+  font-weight: 600;
+}
+
+/* Strings & Attributes values */
+.code-highlight .token.string,
+.code-highlight .token.char,
+.code-highlight .token.attr-value {
+  color: #34D399;
+}
+
+/* Functions & Methods (init, recordTouch, identify, getCheckoutToken, createOrder) */
+.code-highlight .token.function {
+  color: #38BDF8;
+  font-weight: 500;
+}
+
+/* Classes & Built-in Objects (Elysium, Date, Stripe) */
+.code-highlight .token.class-name,
+.code-highlight .token.maybe-class-name,
+.code-highlight .token.builtin {
+  color: #FBBF24;
+  font-weight: 600;
+}
+
+/* Numbers */
+.code-highlight .token.number {
+  color: #F59E0B;
+}
+
+/* Booleans, Constants, Null & Undefined */
+.code-highlight .token.boolean,
+.code-highlight .token.constant,
+.code-highlight .token.null,
+.code-highlight .token.undefined {
+  color: #FB7185;
+  font-weight: 600;
+}
+
+/* Properties & JSON Keys */
+.code-highlight .token.property {
+  color: #93C5FD;
+}
+
+/* Operators (=, =>, ===, +, ?, :) */
+.code-highlight .token.operator {
+  color: #F472B6;
+}
+
+/* HTML / XML Tags (<script>, <div>, <input>) */
+.code-highlight .token.tag {
+  color: #F87171;
+}
+
+.code-highlight .token.tag .token.punctuation {
+  color: #94A3B8;
+}
+
+/* HTML / XML Attribute Names (src, async, type, value) */
+.code-highlight .token.attr-name {
+  color: #38BDF8;
+}
+
+/* Regex & Variables */
+.code-highlight .token.regex,
+.code-highlight .token.variable {
+  color: #FB923C;
+}
+
+/* Bash Command & Parameter Tweaks */
+.code-highlight .token.parameter {
+  color: #F472B6;
+}
+
+.code-highlight .token.selector,
+.code-highlight .token.symbol {
+  color: #2DD4BF;
+}

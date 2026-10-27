@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Terminal, Play, UserCheck, Key, ShoppingCart, Trash2, Check } from 'lucide-react';
+import { highlightCode } from './MacPanel';
 
 export default function Simulator() {
   const [testUrl, setTestUrl] = useState('https://mystore.com/shop?utm_source=google&utm_medium=cpc&utm_campaign=summer_promo&gclid=Cj0KCQjwp_TEST_12345');
@@ -413,9 +414,10 @@ export default function Simulator() {
                     <span className="text-[10px] text-stone-500">{log.timestamp}</span>
                   </div>
 
-                  <pre className="overflow-x-auto rounded-lg bg-[#0D1117] border border-[#21262D] p-3 text-[11px] text-cyan-200/90 leading-relaxed">
-                    {JSON.stringify(log.data, null, 2)}
-                  </pre>
+                  <pre 
+                    className="overflow-x-auto rounded-lg bg-[#0D1117] border border-[#21262D] p-3 text-[11px] leading-relaxed code-highlight text-[#E6EDF3]"
+                    dangerouslySetInnerHTML={{ __html: highlightCode(JSON.stringify(log.data, null, 2), 'json') }}
+                  />
                 </div>
               ))}
             </div>
